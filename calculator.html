@@ -3,158 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scientific Calculator</title>
+  <title>Casio Style Scientific Calculator</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: #f0f0f0;
-      margin: 0;
+      background: #d7d7d7;
+      font-family: Arial, sans-serif;
     }
 
     .calculator {
-      background: white;
+      width: 380px;
+      background: #2d2d2d;
+      border-radius: 20px;
       padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      width: 360px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .brand {
+      color: white;
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .screen {
+      background: #b9d8a6;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
     }
 
     #display {
       width: 100%;
       height: 60px;
-      font-size: 24px;
+      border: none;
+      background: transparent;
+      font-size: 28px;
       text-align: right;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
+      outline: none;
+      color: #111;
     }
 
     .buttons {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
+      gap: 8px;
     }
 
     button {
-      padding: 15px;
-      font-size: 18px;
+      height: 55px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
-      background: #e0e0e0;
+      background: #4b4b4b;
+      color: white;
       transition: 0.2s;
     }
 
     button:hover {
-      background: #d0d0d0;
+      opacity: 0.9;
     }
 
-    .equal {
-      background: #4caf50;
-      color: white;
+    .orange {
+      background: #ff9800;
     }
 
-    .equal:hover {
-      background: #43a047;
-    }
-
-    .operator {
+    .blue {
       background: #2196f3;
-      color: white;
     }
 
-    .operator:hover {
-      background: #1e88e5;
+    .green {
+      background: #4caf50;
+    }
+
+    .gray {
+      background: #666;
     }
   </style>
 </head>
 <body>
 
-  <div class="calculator">
+<div class="calculator">
+  <div class="brand">CASIO STYLE</div>
+
+  <div class="screen">
     <input type="text" id="display" readonly>
-
-    <div class="buttons">
-      <button onclick="clearDisplay()">C</button>
-      <button onclick="deleteLast()">⌫</button>
-      <button onclick="appendValue('(')">(</button>
-      <button onclick="appendValue(')')">)</button>
-      <button class="operator" onclick="appendValue('/')">÷</button>
-
-      <button onclick="appendValue('7')">7</button>
-      <button onclick="appendValue('8')">8</button>
-      <button onclick="appendValue('9')">9</button>
-      <button onclick="appendValue('*')">×</button>
-      <button onclick="appendFunction('sqrt')">√</button>
-
-      <button onclick="appendValue('4')">4</button>
-      <button onclick="appendValue('5')">5</button>
-      <button onclick="appendValue('6')">6</button>
-      <button onclick="appendValue('-')">−</button>
-      <button onclick="appendFunction('pow')">x²</button>
-
-      <button onclick="appendValue('1')">1</button>
-      <button onclick="appendValue('2')">2</button>
-      <button onclick="appendValue('3')">3</button>
-      <button onclick="appendValue('+')">+</button>
-      <button onclick="appendFunction('log')">log</button>
-
-      <button onclick="appendValue('0')">0</button>
-      <button onclick="appendValue('.')">.</button>
-      <button onclick="appendFunction('sin')">sin</button>
-      <button onclick="appendFunction('cos')">cos</button>
-      <button onclick="appendFunction('tan')">tan</button>
-
-      <button onclick="appendValue('Math.PI')">π</button>
-      <button onclick="appendValue('Math.E')">e</button>
-      <button class="equal" onclick="calculate()">=</button>
-    </div>
   </div>
 
-  <script>
-    const display = document.getElementById('display');
+  <div class="buttons">
+    <button class="orange" onclick="toggleShift()">SHIFT</button>
+    <button class="gray" onclick="appendFunction('asin')">sin⁻¹</button>
+    <button class="gray" onclick="appendFunction('acos')">cos⁻¹</button>
+    <button class="gray" onclick="appendFunction('atan')">tan⁻¹</button>
+    <button class="blue" onclick="appendValue('%')">%</button>
+    <button class="orange" onclick="clearDisplay()">AC</button>
+    <button class="gray" onclick="deleteLast()">DEL</button>
+    <button onclick="appendValue('(')">(</button>
+    <button onclick="appendValue(')')">)</button>
+    <button class="blue" onclick="appendValue('/')">÷</button>
 
-    function appendValue(value) {
-      display.value += value;
-    }
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button class="blue" onclick="appendValue('*')">×</button>
+    <button onclick="appendFunction('sqrt')">√</button>
 
-    function clearDisplay() {
-      display.value = '';
-    }
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button class="blue" onclick="appendValue('-')">−</button>
+    <button onclick="appendFunction('pow')">x²</button>
 
-    function deleteLast() {
-      display.value = display.value.slice(0, -1);
-    }
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button class="blue" onclick="appendValue('+')">+</button>
+    <button onclick="appendFunction('log')">log</button>
 
-    function appendFunction(func) {
-      if (func === 'sqrt') {
+    <button onclick="appendValue('0')">0</button>
+    <button onclick="appendValue('.')">.</button>
+    <button onclick="appendFunction('sin')">sin</button>
+    <button onclick="appendFunction('cos')">cos</button>
+    <button onclick="appendFunction('tan')">tan</button>
+
+    <button onclick="appendValue('Math.PI')">π</button>
+    <button onclick="appendValue('Math.E')">e</button>
+    <button onclick="appendFunction('ln')">ln</button>
+    <button onclick="appendValue('**')">xʸ</button>
+    <button class="green" onclick="calculate()">=</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+
+  function appendValue(value) {
+    display.value += value;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function deleteLast() {
+    display.value = display.value.slice(0, -1);
+  }
+
+  let shiftMode = false;
+
+  function toggleShift() {
+    shiftMode = !shiftMode;
+    alert('SHIFT ' + (shiftMode ? 'ON' : 'OFF'));
+  }
+
+  function appendFunction(func) {
+    switch(func) {
+      case 'sqrt':
         display.value += 'Math.sqrt(';
-      } else if (func === 'pow') {
+        break;
+      case 'pow':
         display.value += '**2';
-      } else if (func === 'log') {
+        break;
+      case 'log':
         display.value += 'Math.log10(';
-      } else if (func === 'sin') {
+        break;
+      case 'ln':
+        display.value += 'Math.log(';
+        break;
+      case 'sin':
         display.value += 'Math.sin(';
-      } else if (func === 'cos') {
+        break;
+      case 'cos':
         display.value += 'Math.cos(';
-      } else if (func === 'tan') {
-        display.value += 'Math.tan(';
-      }
+        break;
+      case 'tan':
+        display.value += shiftMode ? 'Math.atan(' : 'Math.tan(';
+        shiftMode = false;
+        break;
+      case 'asin':
+        display.value += 'Math.asin(';
+        break;
+      case 'acos':
+        display.value += 'Math.acos(';
+        break;
+      case 'atan':
+        display.value += 'Math.atan(';
+        break;
     }
+  }
 
-    function calculate() {
-      try {
-        display.value = eval(display.value);
-      } catch {
-        display.value = 'Error';
-      }
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch {
+      display.value = 'Error';
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
